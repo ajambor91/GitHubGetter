@@ -2,6 +2,10 @@
 
 A simple application for  getting basic Github user and branches data
 
+## Requirements
+- Java 23: Required for development and JAR builds.
+- GraalVM 23: Required for native builds. Linux is strongly recommended, as native builds on Windows may encounter compatibility issues.
+- Quarkus CLI for live coding and extra features (optional)
 ## Development mode
 
 To run application in dev mode with live coding please run the following command in the application's main directory:
@@ -9,7 +13,7 @@ To run application in dev mode with live coding please run the following command
 ```shell script
 ./mvnw quarkus:dev
 ```
-Or if you have already installed quarkus-cli, you can execute this: 
+Or if you have already installed quarkus-cli, you can execute this:
 ```bash
 quarkus dev
 ```
@@ -33,7 +37,7 @@ If you want to build an _über-jar_, execute the following command:
 ./mvnw package -Dquarkus.package.jar.type=uber-jar
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/GitHubGetter-1.0.0-SNAPSHOT-runner.jar`.
 
 ## Creating a native executable
 
@@ -43,17 +47,11 @@ You can create a native executable using:
 ./mvnw package -Dnative
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
 You can then execute your native executable with: `./target/GitHubGetter-1.0.0-SNAPSHOT-runner`
 
 ### Usage
 
-For get user and his branch informations please go to your browser and type 
+For get user and his branch informations please go to your browser and type
 ```bash
     http://localhost:8080/repos/{userName}
 ```
@@ -101,4 +99,10 @@ For run test, execute this command:
 ```bash
     mvn test
 ```
+
+### Note
+- Development Mode: Works perfectly on both Windows 11 and Ubuntu 24.04.2 LTS using Java 23.0.2.
+- JAR Build: Successfully tested on both platforms.
+- Native Build (GraalVM): Works on Ubuntu 24.04.2 LTS but fails on Windows 11 due to compatibility issues.
+- Docker Build: Unsuccessful due to compatibility problems with GraalVM and Java 23.
 
